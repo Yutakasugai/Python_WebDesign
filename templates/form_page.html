@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Take users back to Home Page -->
+    <div class="back-btn">
+        <a href="http://localhost:8080/userHome/{{name}}"><button>Back</button></a>
+    </div>
+
+    <h1>Softwafe Name</h1>
+
+   <form action='/form_page/{{name}}' method="POST">
+        <label for="Device_Name">Device Name: </label>
+        <input type="text" name="Device_Name" required="required"><br>
+        <label for="userName">Agent Name:</label>
+        <input type="text" name="userName" value = '{{name}}' disabled="disabled"><br>
+        <!-- <input type="text" name="userName" disabled="disabled"><br> -->
+        <label for="Note">Note:</label><br>
+        <textarea type="text" name="Note" required="required"></textarea><br>
+        <input type="submit" name='submit' value="submit">
+    </form>
+</body>
+</html>

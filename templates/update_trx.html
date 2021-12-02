@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Update Page</h1>
+
+        <h3>Target: a data sumitted on {{row[2]}}</h3>
+
+        <form action='/update_trx/{{row[0]}}/{{row[5]}}' method="POST">
+            <table border = 2>
+                <tr>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Device Name</th>
+                    <th>Note</th>
+                </tr>
+                    <tr>
+                        <th>{{row[1]}}</th>
+                        <th>{{row[2]}}</th>
+                        <th><input type="text" name="Update-device" value="{{row[3]}}" style="height: 25px; width:90px;"></th>
+                        <th><input type="text" name="Update-note" value="{{row[4]}}" style="height: 25px; width:180px;"></th>
+                    </tr>
+            </table>
+
+            <br>
+
+            <input type="submit" name="submit" value="Update">
+            <input type="submit" name="submit" value="Cancel">
+        </form>
+
+    </div>
+</body>
+</html>

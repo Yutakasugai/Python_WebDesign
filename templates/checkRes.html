@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Take users back to Home Page -->
+    <div class="back-btn">
+        <a href="http://localhost:8080/userHome/{{name}}"><button>Back</button></a>
+    </div>
+    
+    <h1>Check Response</h1>
+    <h2>User Name: {{name}}</h2>
+
+    {% if rows|length == 0 %}
+    <h2>We do not have any datas to response you right now...</h2>
+
+    {% else %}
+    <table border = 2>
+        <tr>
+            <th>Time</th>
+            <th>Date</th>
+            <th>Device Name</th>
+            <th>Note</th>
+            <th>Response</th>
+
+            {% for row in rows %}
+                <tr>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[6]}}</td>
+                </tr>
+            {% endfor %}
+        
+        </tr>
+    </table>
+
+    <h4># Please come here and check often if there is any response for your data #</h4>
+    {% endif %}
+
+</body>
+</html>

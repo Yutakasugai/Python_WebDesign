@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Take users back to Home Page -->
+    <div class="back-btn">
+        <a href="http://localhost:8080/admin/"><button>Back</button></a>
+    </div>
+
+    <div class="content">
+        <h1>Update Userlist</h1>
+
+        <form action='/update/{{row[0]}}' method="POST">
+
+            <label for="Update-name">Username</label>
+            <input type="text" name="Update-name" value="{{row[1]}}"><br>
+        
+            <label for="Update-psw">Password</label>
+            <input type="text" name="Update-psw" value="{{row[2]}}"><br>
+
+            <input type="submit" name="submit" value="Update">
+        </form>
+    </div>
+</body>
+</html>

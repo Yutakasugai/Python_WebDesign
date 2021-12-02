@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="http://localhost:8080/admin/{{name}}"><button>Back</button></a>
+
+    
+    <h1>Transaction</h1>
+
+    <table border = 2>
+        <tr>
+            <th>Time</th>
+            <th>Date</th>
+            <th>Device Name</th>
+            <th>Note</th>
+            <th>Agent</th>
+            <th>Response</th>
+            <th>Command</th>
+
+            {% for row in rows %}
+                <tr>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>
+                        <a href="/update_trx/{{row[0]}}/{{row[5]}}">Update</a><br>
+                        <a href="/delete_trx/{{row[0]}}/{{row[5]}}">Delete</a><br>
+                    </td>
+                
+                </tr>
+            {% endfor %}
+        </tr>
+    </table>
+</body>
+</html>

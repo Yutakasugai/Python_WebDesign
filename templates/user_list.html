@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Take users back to Home Page -->
+    <div class="back-btn">
+        <a href="http://localhost:8080/admin/{{name}}"><button>Back</button></a>
+    </div>
+
+    <h1>User List</h1>
+ 
+    <table border = 1>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Command</th>
+        </tr>
+        {% for row in rows %}
+            <tr>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>
+                    <a href="/update/{{row[0]}}">Update</a><br>
+                    <a href="/delete/{{row[0]}}">Delete</a><br>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

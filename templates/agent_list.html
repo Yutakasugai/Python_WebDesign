@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Agent List</h1>
+    <div class="back-btn">
+        <a href="http://localhost:8080/admin/{{name}}"><button>Back</button></a>
+    </div>
+    <table border = 2> 
+        <thead>
+            <td>ID</td>
+            <td>Name</td>
+        </thead>
+        {% for row in rows %}
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+               
+            </tr>
+         {% endfor %}
+    
+    </table>
+</body>
+</html>

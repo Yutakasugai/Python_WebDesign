@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Take users back to Home Page -->
+    <div class="back-btn">
+        <a href="http://localhost:8080/userHome/{{name}}"><button>Back</button></a>
+    </div>
+
+    <h1>Check History</h1>
+    <h2>User Name: {{name}}</h2>
+
+    {% if rows|length == 0 %}
+    <h2>There is no your data right now</h2>
+    <div class="add-btn">
+        <a href="http://localhost:8080/form_page/{{name}}"><button>Add</button></a>
+    </div>
+
+    {% else %}
+    <h2>Check your past submission</h2>
+
+    <table border = 2>
+        <tr>
+            <th>Time</th>
+            <th>Date</th>
+            <th>Device Name</th>
+            <th>Note</th>
+            <th>Command</th>
+
+            <!-- <tr>
+                <td>{{rows[1]}}</td>
+                <td>{{rows[2]}}</td>
+                <td>{{rows[3]}}</td>
+                <td>{{rows[4]}}</td>
+                <td>{{rows[5]}}</td>
+            
+            </tr> -->
+
+            {% for row in rows %}
+                <tr>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>
+                        <a href="/update_trx/{{row[0]}}/{{row[5]}}">Update</a><br>
+                        <a href="/delete_trx/{{row[0]}}/{{row[5]}}">Delete</a><br>
+                    </td>
+                </tr>
+            {% endfor %}
+        
+        </tr>
+    </table>
+
+    <br>
+
+    <div class="add-btn">
+        <a href="http://localhost:8080/form_page/{{name}}"><button>Add</button></a>
+    </div>
+    {% endif %}
+
+</body>
+</html>
