@@ -124,7 +124,6 @@ def login():
                 cur = conn1.cursor()
                 cur.execute("select * from userLog where nameUser = (?) and password = (?)", (userName, password))
                 rows = cur.fetchall()
-                print(rows)
 
                 conn.close_connection()
                 
@@ -238,7 +237,6 @@ def signup():
                 return render_template('signup.html', msg = msg)
 
     else:    
-        # print(request.method, 'else')
         return render_template('signup.html')
 
 @app.route('/admin/<name>')
@@ -322,7 +320,7 @@ def delete_trx(id = None, name = None):
     conn1.commit()
 
     conn.close_connection()
-    return redirect(url_for('checkPage', name = name))
+    return redirect(url_for('view_all', name = name))
 
 @app.route('/update_trx/<int:id>/<name>', methods = ['POST', 'GET'])
 def update_trx(id = None, name = None):
@@ -333,19 +331,15 @@ def update_trx(id = None, name = None):
             #Create connection to DB
             conn1 = conn.create_connection()
                 
-            dname = request.form['Update-device']
-            dnote = request.form['Update-note']
+            response = request.form['Update-response']
             
             cur = conn1.cursor()
-            cur.execute("UPDATE trx SET Device_Name = (?), Note = (?) WHERE ID = (?)", (dname, dnote, id))
+            cur.execute("UPDATE trx SET Result = (?) WHERE ID = (?)", (response, id))
             conn1.commit()
             
             conn.close_connection()
 
-            return redirect(url_for('checkPage', name = name))
-
-        elif request.form["submit"] == "Cancel":
-            return redirect(url_for('checkPage', name = name))
+            return redirect(url_for('view_all', name = name))
 
     else:
         #Create an instance of class database 
@@ -357,7 +351,7 @@ def update_trx(id = None, name = None):
         cur.execute("select * from trx where ID = (?)", [id])
         row = cur.fetchone()
         print(row)
-        return render_template('update_trx.html', row = row) 
+        return render_template('update_trx.html', row = row, name = name) 
 
 # if __name__ == "__main__":
 #     app.run(host="127.0.0.1", port=8080, debug=True)
