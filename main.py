@@ -124,7 +124,6 @@ def login():
                 cur = conn1.cursor()
                 cur.execute("select * from userLog where nameUser = (?) and password = (?)", (userName, password))
                 rows = cur.fetchall()
-                print(rows)
 
                 conn.close_connection()
                 
@@ -238,7 +237,6 @@ def signup():
                 return render_template('signup.html', msg = msg)
 
     else:    
-        # print(request.method, 'else')
         return render_template('signup.html')
 
 @app.route('/admin/<name>')
@@ -322,7 +320,7 @@ def delete_trx(id = None, name = None):
     conn1.commit()
 
     conn.close_connection()
-    return redirect(url_for('checkPage', name = name))
+    return redirect(url_for('view_all', name = name))
 
 @app.route('/update_trx/<int:id>/<name>', methods = ['POST', 'GET'])
 def update_trx(id = None, name = None):
@@ -333,19 +331,15 @@ def update_trx(id = None, name = None):
             #Create connection to DB
             conn1 = conn.create_connection()
                 
-            dname = request.form['Update-device']
-            dnote = request.form['Update-note']
+            response = request.form['Update-response']
             
             cur = conn1.cursor()
-            cur.execute("UPDATE trx SET Device_Name = (?), Note = (?) WHERE ID = (?)", (dname, dnote, id))
+            cur.execute("UPDATE trx SET Result = (?) WHERE ID = (?)", (response, id))
             conn1.commit()
             
             conn.close_connection()
 
-            return redirect(url_for('checkPage', name = name))
-
-        elif request.form["submit"] == "Cancel":
-            return redirect(url_for('checkPage', name = name))
+            return redirect(url_for('view_all', name = name))
 
     else:
         #Create an instance of class database 
@@ -357,7 +351,65 @@ def update_trx(id = None, name = None):
         cur.execute("select * from trx where ID = (?)", [id])
         row = cur.fetchone()
         print(row)
-        return render_template('update_trx.html', row = row) 
+        return render_template('update_trx.html', row = row, name = name) 
+
+@app.route('/admin_list/<name>')
+def admin_list(name):
+    #Create an instance of class database 
+    conn = WarehouseDB('warehouse.db')
+    #Create connection to DB
+    conn1 = conn.create_connection()
+    
+    cur = conn1.cursor()
+    cur.execute("select * from adminLog")
+    rows = cur.fetchall()
+
+    return render_template('admin_list.html', rows = rows, name = name)
+
+@app.route('/add_admin/<name>', methods = ['POST', 'GET'])
+def add_admin(name):
+    if request.method == 'POST':
+        if request.form["submit"] == "Update":
+                
+            adminName = request.form['Adname']
+            adminPass = request.form['Adpsw']
+            adminRePass = request.form['Adrepsw']
+            
+            if (adminPass == adminRePass):
+                 #Create an instance of class database 
+                conn = WarehouseDB('warehouse.db')
+                #Create connection to DB
+                conn1 = conn.create_connection()
+
+                cur = conn1.cursor()
+                cur.execute("select * from adminLog where nameAd =(?)", [adminName])
+                row = cur.fetchall()
+
+                conn.close_connection()
+
+                if (len(row) > 0):
+                    msg = 'Your username is already exist, please try with other username'
+                    return render_template('add_admin.html', msg = msg, name = name)
+
+                else:
+                    #Create an instance of class database 
+                    conn = WarehouseDB('warehouse.db')
+                    #Create connection to DB
+                    conn1 = conn.create_connection()
+
+                    cur = conn1.cursor()
+                    cur.execute("INSERT INTO adminLog(nameAd, passwordAd) VALUES(?, ?)", (adminName, adminPass))
+                    conn1.commit()
+                    conn.close_connection()
+                    return redirect(url_for('admin_list', name = name))
+            
+            else:
+                msg = 'Your re-typed password not matched with an orginal password'
+                return render_template('add_admin.html', msg = msg, name = name)
+
+    else:
+        return render_template('add_admin.html', name = name)
+                    
 
 # if __name__ == "__main__":
 #     app.run(host="127.0.0.1", port=8080, debug=True)

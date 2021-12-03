@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Take users back to Home Page -->
+    <div class="back-btn">
+        <a href="http://localhost:8080/"><button>Home</button></a>
+    </div>
+
+    <h1>Admin: Control Room</h1>
+
+    <h3>User Name: {{name}}</h3>
+
+    <div class="">
+        <a href="http://localhost:8080/user_list/{{name}}"><button>User List</button></a>
+        <a href="http://localhost:8080/agent_list/{{name}}"><button>Agent List</button></a>
+        <a href="http://localhost:8080/admin_list/{{name}}"><button>Admin List</button></a>
+        <a href="http://localhost:8080/view_all/{{name}}"><button>View All</button></a>
+    </div>
+
+    {{msg}}
+
+</body>
+</html>
