@@ -9,12 +9,8 @@ from markupsafe import escape
 import datetime
 from database import * 
 
-
 #initializing web framework / Flask class
 app = Flask(__name__)
-
-
-
 
 #Specify which funtion to run or the webpage 
 @app.route('/')
@@ -352,6 +348,64 @@ def update_trx(id = None, name = None):
         row = cur.fetchone()
         print(row)
         return render_template('update_trx.html', row = row, name = name) 
+
+@app.route('/admin_list/<name>')
+def admin_list(name):
+    #Create an instance of class database 
+    conn = WarehouseDB('warehouse.db')
+    #Create connection to DB
+    conn1 = conn.create_connection()
+    
+    cur = conn1.cursor()
+    cur.execute("select * from adminLog")
+    rows = cur.fetchall()
+
+    return render_template('admin_list.html', rows = rows, name = name)
+
+@app.route('/add_admin/<name>', methods = ['POST', 'GET'])
+def add_admin(name):
+    if request.method == 'POST':
+        if request.form["submit"] == "Update":
+                
+            adminName = request.form['Adname']
+            adminPass = request.form['Adpsw']
+            adminRePass = request.form['Adrepsw']
+            
+            if (adminPass == adminRePass):
+                 #Create an instance of class database 
+                conn = WarehouseDB('warehouse.db')
+                #Create connection to DB
+                conn1 = conn.create_connection()
+
+                cur = conn1.cursor()
+                cur.execute("select * from adminLog where nameAd =(?)", [adminName])
+                row = cur.fetchall()
+
+                conn.close_connection()
+
+                if (len(row) > 0):
+                    msg = 'Your username is already exist, please try with other username'
+                    return render_template('add_admin.html', msg = msg, name = name)
+
+                else:
+                    #Create an instance of class database 
+                    conn = WarehouseDB('warehouse.db')
+                    #Create connection to DB
+                    conn1 = conn.create_connection()
+
+                    cur = conn1.cursor()
+                    cur.execute("INSERT INTO adminLog(nameAd, passwordAd) VALUES(?, ?)", (adminName, adminPass))
+                    conn1.commit()
+                    conn.close_connection()
+                    return redirect(url_for('admin_list', name = name))
+            
+            else:
+                msg = 'Your re-typed password not matched with an orginal password'
+                return render_template('add_admin.html', msg = msg, name = name)
+
+    else:
+        return render_template('add_admin.html', name = name)
+                    
 
 # if __name__ == "__main__":
 #     app.run(host="127.0.0.1", port=8080, debug=True)

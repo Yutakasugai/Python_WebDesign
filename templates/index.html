@@ -4,15 +4,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warehouse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .main {
+            border-color: rgba(255, 255, 255, .3);
+            background-color: transparent;
+        }
+
+        .main-container{
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center;
+            /* height: -80px; */
+            width: 94%;
+            max-width: 1720px;
+            margin: 0 auto;
+        }
+
+        .indexMain {
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            list-style: none;
+            text-align: center;
+            width: 30%;
+            justify-self: end;
+        }
+
+        #title-logo {
+            font-family: 'EB Garamond', serif;
+            font-size:  24px;
+        }
+
+        .links {
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            font-family: 'EB Garamond', serif;
+            font-size: 20px;
+        }
+
+        .link:hover {
+            background-color: lightgreen;
+            transition: all 0.3s ease-out;
+        }
+        
+    </style>
 </head>
 <body>
-    <h1>Softwafe Name</h1>
-    <div class="indexMain">
-        <a href="http://localhost:8080/login"><button>Login</button></a>
-            <!-- <button>Agent List</button> -->
-        <a href="http://localhost:8080/signup"><button>Sign up</button></a>
-        <!-- <button>View All</button>       -->
+    <div class="main">
+        <div class="main-container">
+            <div class="main-title">
+                <h1 id="title-logo">Uncle Yuta.com</h1>
+            </div>
+            
+            <div class="indexMain">
+                <a href="http://localhost:8080/login" class="link"><button class="links">Login</button></a>
+                    <!-- <button>Agent List</button> -->
+                <a href="http://localhost:8080/signup" class="link"><button class="links">Sign up</button></a>
+                <!-- <button>View All</button>       -->
+            </div>
+        </div>
     </div>
+
+    <hr>
+    
 </body>
 </html>

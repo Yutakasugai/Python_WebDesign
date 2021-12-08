@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="back-btn">
+        <a href="http://localhost:8080/admin_list/{{name}}"><button>Back</button></a>
+    </div>
+
+    <h1>Update a new admin user</h1>
+
+    <form method='POST'>
+        <label>Admin-Name</label>
+        <input type="text" placeholder="Enter Username" name="Adname"><br>
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter Password" name="Adpsw"><br>
+
+        <label>Re-type Password</label>
+        <input type="password" placeholder="Enter Password" name="Adrepsw"><br>
+
+        <br>
+        
+        <div class="clearfix">
+            <input type="submit" name="submit" value="Update">
+        </div>
+    </form>
+
+    {{msg}}
+</body>
+</html>
