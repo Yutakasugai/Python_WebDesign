@@ -20,21 +20,27 @@
                     <th>Date</th>
                     <th>Device Name</th>
                     <th>Note</th>
+                    <th>Agent</th>
+                    <th>Response</th>
                 </tr>
                     <tr>
                         <th>{{row[1]}}</th>
                         <th>{{row[2]}}</th>
-                        <th><input type="text" name="Update-device" value="{{row[3]}}" style="height: 25px; width:90px;"></th>
-                        <th><input type="text" name="Update-note" value="{{row[4]}}" style="height: 25px; width:180px;"></th>
+                        <th>{{row[3]}}</th>
+                        <th>{{row[4]}}</th>
+                        <th>{{row[5]}}</th>
+                        <!-- <th><input type="text" name="Update-response" value="{{row[6]}}" style="height: 25px; width:180px;"></th> -->
+                        <th><textarea type="text" name="Update-response" value="{{row[6]}}" style="height: 28px; width:180px;"></textarea></th>
                     </tr>
             </table>
 
             <br>
 
             <input type="submit" name="submit" value="Update">
-            <input type="submit" name="submit" value="Cancel">
         </form>
 
     </div>
+
+    <a href="http://localhost:8080/view_all/{{name}}"><button>Cancel</button></a>
 </body>
 </html>
